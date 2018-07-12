@@ -1,6 +1,5 @@
 package com.xuan.floatlayout;
 
-import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,6 +12,7 @@ import android.view.ViewGroup;
  * @descript
  */
 public abstract class BaseFloatAdapter {
+    private final DataSetObservable mDataSetObservable = new DataSetObservable();
 
     //有多少条目
     public abstract int getCount();
@@ -20,12 +20,19 @@ public abstract class BaseFloatAdapter {
     //获取当前view
     public abstract View getView(int position, ViewGroup parent);
 
-    //观察者模式 通知更新
-    public void unregisterDataSetObserver(DataSetObserver observer){
-
+    public void registerDataSetObserver(FloatLayoutObserver observer) {
+        mDataSetObservable.registerObserver(observer);
     }
 
-    public void registerDataSetObserver(DataSetObserver observer){
+    public void unregisterDataSetObserver(FloatLayoutObserver observer) {
+        mDataSetObservable.unregisterObserver(observer);
+    }
 
+    public void isVisibleAddView(){
+        mDataSetObservable.notifyIsVisibleAddView();
+    }
+
+    public void onChanged(){
+        mDataSetObservable.notifyChanged();
     }
 }

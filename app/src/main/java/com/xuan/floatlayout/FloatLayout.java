@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,9 +21,14 @@ import java.util.ArrayList;
  */
 public class FloatLayout extends ViewGroup {
 
-    ArrayList<ArrayList<View>> itemList;
+    private ArrayList<ArrayList<View>> itemList;
+    /**
+     * 缓存
+     */
+    private SparseArray<View> mTransientStateViews;
 
-    private BaseFloatAdapter adapter;
+    private BaseFloatAdapter mAdapter;
+    private int mItemCount;
 
     public FloatLayout(Context context) {
         this(context,null);
@@ -188,18 +194,41 @@ public class FloatLayout extends ViewGroup {
 //    }
 
     public void setAdapter(BaseFloatAdapter adapter){
-        if(adapter==null){
-            throw new RuntimeException("请设置BaseFloatAdapter");
+        if(mAdapter !=null && observer!=null){
+            adapter.unregisterDataSetObserver(observer);
         }
-        this.adapter=adapter;
+        mAdapter =adapter;
 
+        observer=new AdapterDataSetObserver();
+        mAdapter.registerDataSetObserver(observer);
+
+        insertView();
+    }
+
+    public void insertView(){
         removeAllViews();
+        mItemCount= mAdapter.getCount();
 
-        int childCount=adapter.getCount();
-        for (int i = 0; i < childCount; i++) {
-            View childView=adapter.getView(i,this);
+        for (int i = 0; i < mItemCount; i++) {
+            View childView= mAdapter.getView(i,this);
             addView(childView);
         }
     }
 
+    private AdapterDataSetObserver observer;
+    /**
+     * 具体的观察者类对象
+     */
+    private class AdapterDataSetObserver extends FloatLayoutObserver{
+
+        @Override
+        public void isVisibleAddView() {
+        }
+
+        @Override
+        public void onChanged() {
+            //重新添加
+            insertView();
+        }
+    }
 }
