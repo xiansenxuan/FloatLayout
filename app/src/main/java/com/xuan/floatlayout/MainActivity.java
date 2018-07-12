@@ -52,28 +52,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class MyFloatAdapter extends BaseFloatAdapterImpl {
-//        @Override
-//        public View getLayoutView() {
-//            TextView view=new TextView(MainActivity.this);
-//            return view;
-//        }
-//
-//        @Override
-//        protected void bindView(int position, View layoutView) {
-//            TextView view= (TextView) layoutView;
-//
-//            view.setPadding(16,16,16,16);
-//            view.setBackgroundResource(R.drawable.item_tag_bg);
-//            view.setTextSize(14);
-//            view.setText((String)adapter.mItemList.get(position));
-//
-//            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(
-//                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-//            );
-//            params.setMargins(10,10,10,10);
-//
-//            view.setLayoutParams(params);
-//        }
 
         @Override
         public View getView(int position, ViewGroup parent) {
@@ -92,36 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
             return view;
         }
-
-        @Override
-        protected void bindView(int position, View layoutView) {
-
-        }
     }
 
-//    private class MyFloatAdapter extends BaseFloatAdapter{
-//
-//        @Override
-//        public int getCount() {
-//            return itemList.size();
-//        }
-//
-//        @Override
-//        public View getView(int position, ViewGroup parent) {
-//            TextView view=new TextView(MainActivity.this);
-//            view.setPadding(16,16,16,16);
-//            view.setBackgroundResource(R.drawable.item_tag_bg);
-//            view.setTextSize(14);
-//            view.setText(itemList.get(position));
-//
-//            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(
-//                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-//            );
-//            params.setMargins(10,10,10,10);
-//
-//            view.setLayoutParams(params);
-//
-//            return view;
-//        }
-//    }
 }

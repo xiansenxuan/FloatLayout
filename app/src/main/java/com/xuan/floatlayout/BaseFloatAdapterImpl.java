@@ -1,7 +1,6 @@
 package com.xuan.floatlayout;
 
 import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +20,6 @@ public abstract class BaseFloatAdapterImpl extends BaseFloatAdapter {
 
     public BaseFloatAdapterImpl() {
     }
-
-    public int getLayoutResId(){return 0;}
-    public View getLayoutView(){return null;}
 
     public <T> void addItem(List<T> itemList) {
         mItemList.addAll(itemList);
@@ -53,23 +49,6 @@ public abstract class BaseFloatAdapterImpl extends BaseFloatAdapter {
             return mItemList.size();
         }
     }
-
-
-    @Override
-    public View getView(int position, ViewGroup parent) {
-        if(getLayoutResId()!=0){
-            View view=View.inflate(parent.getContext(),getLayoutResId(),null);
-            bindView(position,view);
-            return view;
-        }else if(getLayoutView()!=null){
-            bindView(position,getLayoutView());
-            return getLayoutView();
-        }else{
-            throw new RuntimeException("please Override getLayoutResId or getLayoutView");
-        }
-    }
-
-    protected abstract void bindView(int position, View layoutView);
 
     public void addOnItemClickListener(OnItemClickListener onItemClickListener){
         this.onItemClickListener=onItemClickListener;
