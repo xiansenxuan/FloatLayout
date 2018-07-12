@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
             );
-            params.setMargins(10, 10, 10, 10);
+            params.setMargins(8, 8, 8, 8);
 
             view.setLayoutParams(params);
 
